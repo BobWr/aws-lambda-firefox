@@ -34,6 +34,7 @@ make && make install
 
 编译xkbcomp
 
+```bash
 wget https://www.x.org/releases/individual/app/xkbcomp-1.3.1.tar.gz
 tar -xzf xkbcomp-1.3.1.tar.gz && cd /app/xkbcomp-1.3.1
 
@@ -50,6 +51,8 @@ tar -xzf xorg-server-1.15.0.tar.gz && cd /app/xorg-server-1.15.0
 --with-xkb-bin-directory=/var/task/bin
 
 make && make install
+```
+
 这一步会生成许多文件，其中需要用到的，Xvfb（主角，xvfb的可执行版本，它需要依赖xkbcomp和一些动态库），xkbcomp，xkb以及一些动态库。
 
 2.3  firefox，firefox编译起来不太好操作，于是勉强找了一个别人做好的，在容器中调试通过后将一些动态库拷贝了出来。
@@ -58,6 +61,7 @@ make && make install
 
 这里用lambda-linux的epll repository
 
+```bash
 curl -X GET -o RPM-GPG-KEY-lambda-epll https://lambda-linux.io/RPM-GPG-KEY-lambda-epll
 
 sudo rpm --import RPM-GPG-KEY-lambda-epll
@@ -68,21 +72,24 @@ sudo yum -y install epll-release-2017.03-1.2.ll1.noarch.rpm
 
 //firefox环境
 sudo yum --enablerepo=epll install firefox-compat
+```
+
 接着下载firefox免安装版本，此处用45.3，跟高版本环境没找到。
 
+```bash
 wget -O firefox.tar.bz2 "https://download.mozilla.org/?product=firefox-45.3.0esr-SSL&os=linux64&lang=en-US"
 
 tar -jxvf firefox.tar.bz2
+```
+
 此时在firefox文件夹中的firefox即可以直接运行。
-
-所需全部文件如下：
-
 
 
 2.4  main函数
 
 lambda的入口函数，这里用go实现
 
+```Go
 package main
 
 
@@ -143,6 +150,7 @@ func handler(ctx context.Context) (string, error) {
 func main() {
  lambda.Start(handler)
 }
+```
 
 以上只是做一个记录，具体lambda的使用可见官网。
 

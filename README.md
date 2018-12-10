@@ -17,6 +17,7 @@ ffmpeg的问题很好解决，在其官网可以下载可执行程序而不必�
 
 编译xkeyboard
 
+```bash
 wget https://www.x.org/archive/individual/data/xkeyboard-config/xkeyboard-config-2.19.tar.gz
 
 tar -xzf xkeyboard-config-2.19.tar.gz && cd /var/task/xkeyboard-config-2.19
@@ -29,6 +30,7 @@ export PKG_CONFIG_PATH=/var/task/share/pkgconfig:/var/task/lib/pkgconfig;
 ./configure --prefix=/var/task --with-xkb-base=/var/task/xkb
 
 make && make install
+```
 
 编译xkbcomp
 
